@@ -5,6 +5,7 @@ This project is a Flask API connected to a PostgreSQL database, enabling the add
 Team Members
 •	- Trey Roberts
 •	- Nathaenal Prokop
+
 Prerequisites
 Python 3.6+
 PostgreSQL with tables `basket_a` and `basket_b` in the `dvdrental` database.
