@@ -5,6 +5,7 @@ Team Members
 •	- Trey Roberts
 
 •	- Nathaenal Prokop
+
 Prerequisites
 Python 3.6+
 PostgreSQL with tables `basket_a` and `basket_b` in the `dvdrental` database.
