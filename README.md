@@ -1,3 +1,5 @@
+
+
 Flask PostgreSQL Fruit Basket API
 This project is a Flask API connected to a PostgreSQL database, enabling the addition of fruit data to a basket and retrieval of unique fruits in each basket. It includes error logging and a simple HTML template for displaying results.
 Team Members
