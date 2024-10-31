@@ -1,94 +1,57 @@
-Flask PostgreSQL Fruit Basket API
-This project is a Flask API connected to a PostgreSQL database, enabling the addition of fruit data to a basket and retrieval of unique fruits in each basket. It includes error logging and a simple HTML template for displaying results.
-
-
+Flask API for Fruit Basket Management
+This API, built with Flask, interacts with PostgreSQL tables `basket_a` and `basket_b` to manage and query unique fruit entries in each basket. It provides endpoints for inserting new entries and retrieving unique fruits across both baskets.
 Team Members
-
-•	- Trey Roberts
-
-•	- Nathaenal Prokop
-
-Prerequisites
-Python 3.6+
-PostgreSQL with tables `basket_a` and `basket_b` in the `dvdrental` database.
-Flask, Psycopg2, and Jinja2 libraries for Python.
+- Trey Roberts
+- Nathaenal Prokop
+  
 Quick Start
-1.	1. Clone the Repository
-```bash
-git clone <repository-url>
-cd <repository-folder>
-```
-2.	2. Install Dependencies
-```bash
-pip install flask psycopg2
-```
-3.	3. Database Setup
-Ensure PostgreSQL is running, and create tables if they don’t already exist:
-```sql
+1. **Database Setup**
+Connect to PostgreSQL and create the required tables by executing the SQL commands below:
+
 CREATE TABLE basket_a (
     a INT PRIMARY KEY,
-    fruit_a VARCHAR(100) NOT NULL
+    fruit_a VARCHAR (100) NOT NULL
 );
 
 CREATE TABLE basket_b (
     b INT PRIMARY KEY,
-    fruit_b VARCHAR(100) NOT NULL
+    fruit_b VARCHAR (100) NOT NULL
 );
 
 INSERT INTO basket_a (a, fruit_a) VALUES
-    (1, 'Apple'), (2, 'Orange'), (3, 'Banana'), (4, 'Cucumber');
+    (1, 'Apple'),
+    (2, 'Orange'),
+    (3, 'Banana'),
+    (4, 'Cucumber');
 
 INSERT INTO basket_b (b, fruit_b) VALUES
-    (1, 'Orange'), (2, 'Apple'), (3, 'Watermelon'), (4, 'Pear');
-```
-4.	4. Run the Application
-```bash
+    (1, 'Orange'),
+    (2, 'Apple'),
+    (3, 'Watermelon'),
+    (4, 'Pear');
+    
+2. **Install Required Packages**
+Ensure that the necessary Python packages are installed:
+pip install flask psycopg2
+3. **Run the Flask Application**
+Start the API server by running:
 python app.py
-```
-5.	5. View the Application
-- Open `http://127.0.0.1:5000/api/unique` in your browser to view unique fruits.
-- To add a fruit to `basket_a`, send a POST request to `http://127.0.0.1:5000/api/update_basket_a` with a JSON payload.
-Running the Application
-6.	1. Start the Flask App
-```bash
-python app.py
-```
-7.	2. Access the Application
-- **API endpoint to update `basket_a`**:
-  - **URL**: `http://127.0.0.1:5000/api/update_basket_a`
-  - **Method**: POST
-  - **Payload (JSON)**:
-    ```json
-    {
-      "fruit_a": "Grape",
-      "a": 5
-    }
-    ```
-  - **Response**: Returns `Success!` on successful insertion, otherwise an error message.
+4. **Accessing the API**
+With the server running, test the API endpoints using the examples below.
+API Endpoints
+1. **POST `/api/update_basket_a`**
+Adds a new fruit to `basket_a`.
+- **JSON Body Parameters:**
+  - `fruit_a`: (string) The fruit’s name (default: 'Cherry').
+  - `a`: (int) Unique integer ID for the fruit (default: 5).
+- **Example Request:**
+curl -X POST http://127.0.0.1:5000/api/update_basket_a -H "Content-Type: application/json" -d "{\"a\": 6, \"fruit_a\": \"Mango\"}"
+- **Response:** Returns 'Success!' upon successful insertion or an error message if an issue occurs.
+2. **GET `/api/unique`**
+Retrieves distinct fruits from `basket_a` and `basket_b`.
+- **Example Request:**
+curl http://127.0.0.1:5000/api/unique
+- **Response:** Renders an HTML page with lists of unique fruits from each basket.
+Error Logging
+Errors, such as database or request-handling issues, are recorded in `error.log`, allowing for easy troubleshooting.
 
-- **API endpoint to view unique fruits**:
-  - **URL**: `http://127.0.0.1:5000/api/unique`
-  - **Method**: GET
-  - **Response**: HTML page displaying unique fruits in each basket.
-File Structure
-- `app.py` - Main Flask application
-- `templates/unique.html` - HTML template for displaying unique fruits
-- `error.log` - Log file for error tracking
-Endpoints and Usage
-1. **/api/update_basket_a** (POST)
-   - Adds a fruit to `basket_a`.
-   - Defaults:
-     - `fruit_a`: "Cherry"
-     - `a`: 5
-2. **/api/unique** (GET)
-   - Retrieves unique fruits from `basket_a` and `basket_b`.
-   - Renders results on a simple HTML page.
-Error Handling
-All errors are logged to `error.log` in the format:
-```
-[Timestamp] - ERROR - <Error Message>
-```
-Example
-After running the application, open the browser and navigate to:
-- `http://127.0.0.1:5000/api/unique` to view the unique fruits in each basket.
-To add data to `basket_a`, send a POST request to `/api/update_basket_a` with a JSON payload specifying `"fruit_a"` and `"a"` values.
