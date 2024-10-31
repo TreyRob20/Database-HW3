@@ -90,8 +90,8 @@ All errors are logged to `error.log` in the format:
 Example
 To interact with the API, you can use tools like curl or Postman. Here are some example requests:
  Updating Basket A
+Use this endpoint to add a new fruit entry to basket_a. For example
    
-    Use this endpoint to add a new fruit entry to basket_a. For example
     curl -X POST http://127.0.0.1:5000/api/update_basket_a -H "Content-Type: application/json" -d "{\"a\": 6, \"fruit_a\": \"Mango\"}"
 
 This will insert a new row in basket_a with an ID of 6 and the fruit Mango. If successful, it will return "Success!" as a plain text response.
